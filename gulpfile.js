@@ -50,4 +50,4 @@ exports.dev=dev;
 exports.imagenes=imagenes;
 exports.versionwebp=versionwebp;
 exports.versionavif=versionavif;
-exports.default=series(imagenes,versionwebp,versionavif,css,dev);
+exports.default=series(imagenes,css,dev);
