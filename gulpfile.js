@@ -5,13 +5,16 @@ const autoprefixer = require("autoprefixer");
 const imagemin=require("gulp-imagemin");
 const webp=require("gulp-webp");
 const avif=require("gulp-avif");
+const sourcemaps = require("gulp-sourcemaps")
 
 
 function css(done){
     src("src/scss/app.scss")
-        .pipe(sass({outputStyle:"expanded"}))
-        .pipe(postcss([autoprefixer()]))
-        .pipe(dest("build/css"))
+        .pipe( sourcemaps.init() )
+        .pipe( sass())
+        .pipe( postcss([autoprefixer()]))
+        .pipe( sourcemaps.write('.'))
+        .pipe( dest("build/css"))
     
     done();
 }
@@ -50,4 +53,4 @@ exports.dev=dev;
 exports.imagenes=imagenes;
 exports.versionwebp=versionwebp;
 exports.versionavif=versionavif;
-exports.default=series(imagenes,css,dev);
+exports.default=series(imagenes,versionwebp,versionavif,css,dev);
